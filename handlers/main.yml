@@ -1,0 +1,4 @@
+---
+- name: apache-restart
+  service: name={{ rubedo_web.apache.service }} state=restarted
+  sudo: yes

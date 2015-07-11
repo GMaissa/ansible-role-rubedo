@@ -1,0 +1,52 @@
+---
+# Web role tasks
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Create Apache root directory
+  file: path={{ item.value.root }} group={{ rubedo_web.apache.user }} state=directory mode=0755
+  with_dict: rubedo_web.vhosts
+
+- name: Adding virtual hosts
+  template:
+    src=vhost.conf.j2
+    dest={{ rubedo_web.apache.vhost_dir }}/{{ item.key }}.conf
+    mode=0644
+  with_dict: rubedo_web.vhosts
+  notify: apache-restart
+  when: item.value.enabled|bool
+
+- name: Instal PECL extensions
+  shell: printf "\n" | pecl install {{ item }}
+  with_items: rubedo_web.pecl.extensions
+  register: pecl_installs
+  ignore_errors: yes
+
+- name: Configure PHP to use PECL extensions
+  shell: echo "extension={{ item.item }}.so" > {{ rubedo_web.pecl.conf_dir }}/{{ item.item }}.ini
+  when: item.rc != 1
+  with_items: rubedo_web.pecl_installs.results
+  notify: apache-restart
+
+- name: Set PHP timezone
+  shell: sed -i 's#;date.timezone =.*#date.timezone = {{ rubedo_web.php_timezone }}#g' {{ item }}/php.ini
+  with_items: rubedo_web.php_ini_files
+
+- name: Create "{{ rubedo_web.delivery_account }}" user
+  user: name={{ rubedo_web.delivery_account }} shell=/bin/bash comment="Delivery account" group={{ rubedo_web.apache.group }} groups=sudo append=yes
+  sudo: yes
+
+- name: Create sudoers config for Rubedo
+  template: src=sudoers.j2 dest=/etc/sudoers.d/rubedo mode=0755
+  sudo: yes
+
+- name: Authorizing ssh keys
+  authorized_key: user={{ rubedo_web.delivery_account }} key="{{ lookup('file', item ) }}"
+  with_items: rubedo_web.public_key_files
+  sudo: yes
+
