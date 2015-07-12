@@ -1,17 +1,16 @@
 ---
-rubedo_web:
-  vhosts:
-    rubedo:
-      enabled: yes
-      listen: '*:80'
-      root: /var/www/rubedo
-      name: rubedo.local
-      aliases:
-        - www.rubedo.local
-  
-  php_timezone: Europe/Paris
-  
-  public_key_files:
-      - ~/.ssh/id_rsa.pub
-  
-  delivery_account: delivery
+rubedo_web_vhosts:
+  rubedo:
+    enabled: yes
+    listen: '*:80'
+    root: /var/www/rubedo
+    name: rubedo.local
+    aliases:
+      - www.rubedo.local
+
+rubedo_web_php_timezone: Europe/Paris
+
+rubedo_web_public_keys:
+  - ~/.ssh/id_rsa.pub
+
+rubedo_web_delivery_account: delivery

@@ -1,43 +1,43 @@
 ---
-rubedo_web:
-  apache:
-    service: apache2
-    user: www-data
-    group: www-data
-    vhost_dir: /etc/apache2/sites-enabled
-    mods:
-      - rewrite
-      - headers
-      - expires
 
-  web_packages:
-    - libapache2-mod-php5
-    - php5
-    - php5-cli
-    - php-apc
-    - php5-common
-    - php5-curl
-    - php5-intl
-    - php5-gd
-    - php5-ldap
-    - php5-odbc
-    - php5-xmlrpc
-    - php5-snmp
-    - php-soap
-    - php5-xdebug
-    - php-pear
-    - php5-dev
-    - curl
-    - wget
-    - rsync
-    - gcc
-    - make
+rubedo_web_apache:
+  service: apache2
+  user: www-data
+  group: www-data
+  vhost_dir: /etc/apache2/sites-enabled
+  mods:
+    - rewrite
+    - headers
+    - expires
 
-  pecl:
-    conf_dir: /etc/php5/conf.d
-    extensions:
-      - mongo
+rubedo_web_packages:
+  - libapache2-mod-php5
+  - php5
+  - php5-cli
+  - php-apc
+  - php5-common
+  - php5-curl
+  - php5-intl
+  - php5-gd
+  - php5-ldap
+  - php5-odbc
+  - php5-xmlrpc
+  - php5-snmp
+  - php-soap
+  - php5-xdebug
+  - php-pear
+  - php5-dev
+  - curl
+  - wget
+  - rsync
+  - gcc
+  - make
 
-  php_ini_files:
-    - /etc/php5/apache2
-    - /etc/php5/cli
+rubedo_web_pecl:
+  conf_dir: /etc/php5/conf.d
+  extensions:
+    - mongo
+
+rubedo_web_php_ini_files:
+  - /etc/php5/apache2
+  - /etc/php5/cli
