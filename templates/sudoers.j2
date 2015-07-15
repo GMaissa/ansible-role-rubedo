@@ -1,6 +1,5 @@
 #User  alias specification
 User_Alias  DELIVER   = {{ rubedo_web_delivery_account }}
-User_Alias  SRVSUSERS = {{ rubedo_web_apache.user }}
 
 # Cmnd alias specification
 Cmnd_Alias  APACHECMD  = /usr/sbin/service {{ rubedo_web_apache.service }} reload, /usr/sbin/service {{ rubedo_web_apache.service }} restart, /usr/sbin/service {{ rubedo_web_apache.service }} start, /usr/sbin/service {{ rubedo_web_apache.service }} stop
@@ -11,4 +10,4 @@ Cmnd_Alias  CHGRP_RUBEDO = /bin/chgrp -R {{ rubedo_web_apache.user }} */cache, /
 
 # User privilege specification
 DELIVER  ALL = NOPASSWD : APACHECMD, CHMOD_RUBEDO, CHGRP_RUBEDO
-DELIVER  ALL = (SRVUSERS) NOPASSWD: ALL
+DELIVER  ALL = ({{ rubedo_web_apache.user }}) NOPASSWD: ALL

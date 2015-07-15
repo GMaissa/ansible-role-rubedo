@@ -38,15 +38,12 @@
   with_items: rubedo_web_php_ini_files
 
 - name: Create "{{ rubedo_web_delivery_account }}" user
-  user: name={{ rubedo_web_delivery_account }} shell=/bin/bash comment="Delivery account" group={{ rubedo_web_apache.group }} groups=sudo append=yes
-  sudo: yes
+  user: name={{ rubedo_web_delivery_account }} shell=/bin/bash comment="Delivery account" group={{ rubedo_web_apache.group }} append=yes
 
 - name: Create sudoers config for Rubedo
   template: src=sudoers.j2 dest=/etc/sudoers.d/rubedo mode=0755
-  sudo: yes
 
 - name: Authorizing ssh keys
   authorized_key: user={{ rubedo_web_delivery_account }} key="{{ lookup('file', item ) }}"
   with_items: rubedo_web_public_keys
-  sudo: yes
 
