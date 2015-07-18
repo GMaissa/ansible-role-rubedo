@@ -103,6 +103,6 @@
         Header unset Cache-Control
     </FilesMatch>
 
-    CustomLog "/var/log/{{ rubedo_web_apache.service }}/rubedo-access.log"  proxy env=forwarded
-    ErrorLog  "/var/log/{{ rubedo_web_apache.service }}/rubedo-error.log"
+    CustomLog "/var/log/{{ rubedo_apache.service }}/rubedo-access.log"  proxy env=forwarded
+    ErrorLog  "/var/log/{{ rubedo_apache.service }}/rubedo-error.log"
 </VirtualHost>

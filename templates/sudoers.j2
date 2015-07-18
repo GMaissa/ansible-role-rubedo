@@ -1,13 +1,13 @@
 #User  alias specification
-User_Alias  DELIVER   = {{ rubedo_web_delivery_account }}
+User_Alias  DELIVER   = {{ rubedo_delivery_account }}
 
 # Cmnd alias specification
-Cmnd_Alias  APACHECMD  = /usr/sbin/service {{ rubedo_web_apache.service }} reload, /usr/sbin/service {{ rubedo_web_apache.service }} restart, /usr/sbin/service {{ rubedo_web_apache.service }} start, /usr/sbin/service {{ rubedo_web_apache.service }} stop
+Cmnd_Alias  APACHECMD  = /usr/sbin/service {{ rubedo_apache.service }} reload, /usr/sbin/service {{ rubedo_apache.service }} restart, /usr/sbin/service {{ rubedo_apache.service }} start, /usr/sbin/service {{ rubedo_apache.service }} stop
 
 # Cmnd aliases for eZ Publish
 Cmnd_Alias  CHMOD_RUBEDO = /bin/chmod -R g+w */cache, /bin/chmod -R g+w */log, /bin/chmod -R g+w */public/theme
-Cmnd_Alias  CHGRP_RUBEDO = /bin/chgrp -R {{ rubedo_web_apache.user }} */cache, /bin/chgrp -R {{ rubedo_web_apache.user }} */log, /bin/chgrp -R {{ rubedo_web_apache.user }} */public/theme
+Cmnd_Alias  CHGRP_RUBEDO = /bin/chgrp -R {{ rubedo_apache.user }} */cache, /bin/chgrp -R {{ rubedo_apache.user }} */log, /bin/chgrp -R {{ rubedo_apache.user }} */public/theme
 
 # User privilege specification
 DELIVER  ALL = NOPASSWD : APACHECMD, CHMOD_RUBEDO, CHGRP_RUBEDO
-DELIVER  ALL = ({{ rubedo_web_apache.user }}) NOPASSWD: ALL
+DELIVER  ALL = ({{ rubedo_apache.user }}) NOPASSWD: ALL
