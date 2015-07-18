@@ -1,5 +1,5 @@
 ---
-rubedo_web_vhosts:
+rubedo_vhosts:
   rubedo:
     enabled: yes
     listen: '*:80'
@@ -8,9 +8,10 @@ rubedo_web_vhosts:
     aliases:
       - www.rubedo.local
 
-rubedo_web_php_timezone: Europe/Paris
+rubedo_php_timezone: Europe/Paris
 
-rubedo_web_public_keys:
+rubedo_public_keys:
   - ~/.ssh/id_rsa.pub
 
-rubedo_web_delivery_account: delivery
+rubedo_add_delivery_user: false
+rubedo_delivery_account: rubedo

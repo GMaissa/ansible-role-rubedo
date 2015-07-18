@@ -2,5 +2,4 @@
 - name: RedHat | Install packages
   yum: name={{ item }}
        state=present
-  with_items: rubedo_web_packages
-
+  with_items: rubedo_packages

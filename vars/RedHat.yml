@@ -1,11 +1,11 @@
 ---
-rubedo_web_apache:
+rubedo_apache:
   service: httpd
   user: apache
   group: apache
   vhost_dir: /etc/httpd/conf.d
-  
-rubedo_web_packages:
+
+rubedo_packages:
   - httpd
   - httpd-devel
   - curl
@@ -28,12 +28,12 @@ rubedo_web_packages:
   - php-mbstring
   - php-snmp
   - php-soap
-  
-rubedo_web_pecl:
+
+rubedo_pecl:
   conf_dir: /etc/php.d
   extensions:
     - apc
     - mongo
-  
-rubedo_web_php_ini_files:
+
+rubedo_php_ini_files:
   - /etc

@@ -1,0 +1,4 @@
+---
+- name: Set PHP timezone
+  shell: sed -i 's#;date.timezone =.*#date.timezone = {{ rubedo_php_timezone }}#g' {{ item }}/php.ini
+  with_items: rubedo_php_ini_files

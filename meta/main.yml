@@ -4,14 +4,13 @@ dependencies: []
 galaxy_info:
   author:
     - "Guillaume Maïssa"
-  description: Provisioning for Rubedo web server on Debian / CentOS / RHEL
+  description: Provisioning for Rubedo web server on Debian / RHEL OS families
   company: Freelance
   license: BSD
-  min_ansible_version: 1.4
+  min_ansible_version: 1.6
   platforms:
     - name: Debian
       versions:
-        - jessie
         - wheezy
     - name: Redhat
       versions:
@@ -22,4 +21,3 @@ galaxy_info:
   categories:
    - development
    - web
-  

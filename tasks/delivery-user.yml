@@ -1,0 +1,10 @@
+---
+- name: Create "{{ rubedo_delivery_account }}" user
+  user: name={{ rubedo_delivery_account }} shell=/bin/bash comment="Delivery account" group={{ rubedo_apache.group }} append=yes
+
+- name: Create sudoers config for Rubedo
+  template: src=sudoers.j2 dest=/etc/sudoers.d/rubedo mode=0755
+
+- name: Authorizing ssh keys
+  authorized_key: user={{ rubedo_delivery_account }} key="{{ lookup('file', item ) }}"
+  with_items: rubedo_public_keys
