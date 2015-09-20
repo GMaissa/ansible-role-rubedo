@@ -2,8 +2,8 @@
 sudo: required
 language: python
 python: "2.7"
-services:
-  - docker
+#services:
+#  - docker
 
 env:
   - ANSIBLE_VERSION=1.6 PLAYBOOK=tests/playbook-travis.yml INVENTORY=tests/inventory-travis
