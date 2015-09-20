@@ -25,7 +25,7 @@
 
 - name: Debian | Define a generic ServerName in default vhost
   lineinfile: dest="/etc/{{ rubedo_apache.daemon }}/sites-available/default"
-              line="\n        ServerName default"
+              line="        ServerName default"
               insertafter="ServerAdmin"
   notify: Restart Apache
 
