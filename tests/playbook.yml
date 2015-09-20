@@ -10,14 +10,13 @@
       shell: ./rubedo.sh
       args:
         chdir: "{{ rubedo_vhost.root }}"
-
   vars:
     common_packages:
       - vim
       - tree
       - git
     rubedo_vhost:
-      filename: rubedo
+      filename: rubedo.conf
       enabled: yes
       listen: '*:80'
       root: /var/www/rubedo
