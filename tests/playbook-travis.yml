@@ -3,4 +3,5 @@
   remote_user: root
   roles:
     - ansible-role-rubedo
-  rubedo_download: true
+  vars:
+    rubedo_download: true
