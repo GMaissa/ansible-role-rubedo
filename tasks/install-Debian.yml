@@ -9,5 +9,23 @@
 - name: Debian | Install apache modules
   apache2_module: name={{ item }}
                   state=present
-  with_items: rubedo_apache.mods
+  with_items: rubedo_apache.mods_enabled
   notify: Restart Apache
+
+- name: Debian | Adding apache vhost configuration
+  template:
+    src=vhost_apache.conf.j2
+    dest="/etc/{{ rubedo_apache.daemon }}/sites-available/{{ rubedo_vhost.filename }}"
+  register: add_vhost
+
+- name: Debian | Enable new vhost
+  shell: a2ensite {{ rubedo_vhost.filename }}
+  when: rubedo_vhost.enabled|bool and add_vhost.changed
+  notify: Restart Apache
+
+- name: Debian | Define a generic ServerName in default vhost
+  lineinfile: dest="/etc/{{ rubedo_apache.daemon }}/sites-available/default"
+              line="        ServerName default"
+              insertafter="ServerAdmin"
+  notify: Restart Apache
+

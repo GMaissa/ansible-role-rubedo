@@ -1,0 +1,19 @@
+---
+- src: https://github.com/GMaissa/ansible-role-common
+  version: master
+  name: GMaissa.common
+
+- src: https://github.com/GMaissa/ansible-role-rubedo
+  version: master
+  name: GMaissa.rubedo
+
+- src: https://github.com/GMaissa/ansible-role-mongodb
+  version: master
+  name: GMaissa.mongodb
+
+- src: https://github.com/GMaissa/ansible-role-elasticsearch
+  version: master
+  name: GMaissa.elasticsearch
+
+- src: kosssi.composer
+

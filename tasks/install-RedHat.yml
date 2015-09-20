@@ -3,3 +3,10 @@
   yum: name={{ item }}
        state=present
   with_items: rubedo_packages
+
+- name: RedHat | Add apache vhosts configuration.
+  template:
+    src: vhost_apache.conf.j2
+    dest: "/etc/{{ rubedo_apache.daemon }}/conf.d/{{ rubedo_vhost.filename }}"
+  notify: Restart Apache
+  when: rubedo_vhost.enabled|bool

@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - ansible-role-rubedo
+  vars:
+    rubedo_download: true

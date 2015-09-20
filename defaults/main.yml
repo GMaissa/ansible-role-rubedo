@@ -1,17 +1,23 @@
 ---
-rubedo_vhosts:
-  rubedo:
-    enabled: yes
-    listen: '*:80'
-    root: /var/www/rubedo
-    name: rubedo.local
-    aliases:
-      - www.rubedo.local
+# Define php timezone
+rubedo_php_date_timezone: Europe/Paris
 
-rubedo_php_timezone: Europe/Paris
+# Define APC shm size
+rubedo_php_apc_shm_size: 128M
 
-rubedo_public_keys:
-  - ~/.ssh/id_rsa.pub
+# Rubedo vhost configuration
+rubedo_vhost:
+  filename: rubedo.conf
+  enabled: yes
+  listen: '*:80'
+  root: /var/www/rubedo
+  name: rubedo.local
+  aliases:
+    - www.rubedo.local
 
-rubedo_add_delivery_user: false
-rubedo_delivery_account: rubedo
+# Download Rubedo sources
+rubedo_download: false
+
+# Rubedo version to download
+rubedo_version: 3.2.0
+

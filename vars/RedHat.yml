@@ -1,9 +1,8 @@
 ---
 rubedo_apache:
-  service: httpd
+  daemon: httpd
   user: apache
   group: apache
-  vhost_dir: /etc/httpd/conf.d
 
 rubedo_packages:
   - httpd
@@ -34,6 +33,3 @@ rubedo_pecl:
   extensions:
     - apc
     - mongo
-
-rubedo_php_ini_files:
-  - /etc

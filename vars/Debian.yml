@@ -1,11 +1,10 @@
 ---
 
 rubedo_apache:
-  service: apache2
+  daemon: apache2
   user: www-data
   group: www-data
-  vhost_dir: /etc/apache2/sites-enabled
-  mods:
+  mods_enabled:
     - rewrite
     - headers
     - expires
@@ -37,7 +36,3 @@ rubedo_pecl:
   conf_dir: /etc/php5/conf.d
   extensions:
     - mongo
-
-rubedo_php_ini_files:
-  - /etc/php5/apache2
-  - /etc/php5/cli
