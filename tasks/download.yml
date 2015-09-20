@@ -3,13 +3,13 @@
     stat: path={{ rubedo_vhost.root }}/module/Rubedo
     register: rubedo_dir
 
-  - name: Download eZ Publish sources
+  - name: Download Rubedo sources
     get_url: url=https://github.com/WebTales/rubedo/archive/{{ rubedo_version }}.tar.gz
              dest=/tmp/rubedo.tar.gz
     when: rubedo_dir.stat.isdir is not defined or rubedo_dir.stat.isdir != 1
     register: download_src
 
-  - name: Create Apache root directory
+  - name: Create project root directory
     file: path={{ rubedo_vhost.root }} group={{ rubedo_apache.group }} state=directory mode=0755
 
   - name: Untar Rubedo sources
