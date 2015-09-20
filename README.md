@@ -2,7 +2,7 @@ Rubedo
 ======
 [![Travis branch](https://img.shields.io/travis/GMaissa/ansible-role-rubedo/master.svg)](https://travis-ci.org/GMaissa/ansible-role-rubedo)
 
-This Ansible role installs [Rubedo](http://www.rubedo-project.org) andd all it dependencies
+This Ansible role installs [Rubedo](http://www.rubedo-project.org) and all its dependencies.
 
 Requirements
 ------------
