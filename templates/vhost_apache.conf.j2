@@ -1,13 +1,13 @@
-<VirtualHost {{ rubedo_apache_vhost.listen }}>
-    DocumentRoot "{{ rubedo_apache_vhost.root }}/public"
-    ServerName {{ rubedo_apache_vhost.name }}
-    {% if rubedo_apache_vhost.aliases is defined %}
-    {% for ServerAlias in rubedo_apache_vhost.aliases %}
+<VirtualHost {{ rubedo_vhost.listen }}>
+    DocumentRoot "{{ rubedo_vhost.root }}/public"
+    ServerName {{ rubedo_vhost.name }}
+    {% if rubedo_vhost.aliases is defined %}
+    {% for ServerAlias in rubedo_vhost.aliases %}
       ServerAlias {{ ServerAlias }}
     {% endfor %}
     {% endif %}
 
-    <Directory "{{ rubedo_apache_vhost.root }}/public">
+    <Directory "{{ rubedo_vhost.root }}/public">
         Options -Indexes +FollowSymLinks
         AllowOverride None
         Order allow,deny

@@ -9,14 +9,14 @@
     - name: Install Rubedo dependencies
       shell: ./rubedo.sh
       args:
-        chdir: "{{ rubedo_apache_vhost.root }}"
+        chdir: "{{ rubedo_vhost.root }}"
 
   vars:
     common_packages:
       - vim
       - tree
       - git
-    rubedo_apache_vhost:
+    rubedo_vhost:
       filename: rubedo
       enabled: yes
       listen: '*:80'

@@ -6,7 +6,7 @@ rubedo_php_date_timezone: Europe/Paris
 rubedo_php_apc_shm_size: 128M
 
 # Rubedo vhost configuration
-rubedo_apache_vhosts:
+rubedo_vhost:
   filename: rubedo.conf
   enabled: yes
   listen: '*:80'
