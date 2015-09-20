@@ -5,19 +5,6 @@
 - include: install-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Create Apache root directory
-  file: path={{ item.value.root }} group={{ rubedo_apache.user }} state=directory mode=0755
-  with_dict: rubedo_vhosts
-
-- name: Adding virtual hosts
-  template:
-    src=vhost_apache.conf.j2
-    dest={{ rubedo_apache.vhost_dir }}/{{ item.key }}.conf
-    mode=0644
-  with_dict: rubedo_vhosts
-  notify: Restart Apache
-  when: item.value.enabled|bool
-
 - name: Install PECL extensions
   shell: printf "\n" | pecl install {{ item }}
   with_items: rubedo_pecl.extensions

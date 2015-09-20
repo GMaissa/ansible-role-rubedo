@@ -1,0 +1,18 @@
+---
+  - name: Check if the sources have already been downloaded
+    stat: path={{ rubedo_apache_vhost.root }}/module/Rubedo
+    register: rubedo_dir
+
+  - name: Download eZ Publish sources
+    get_url: url=https://github.com/WebTales/rubedo/archive/{{ rubedo_version }}.tar.gz
+             dest=/tmp/rubedo.tar.gz
+    when: rubedo_dir.stat.isdir is not defined or rubedo_dir.stat.isdir != 1
+    register: download_src
+
+  - name: Create Apache root directory
+    file: path={{ rubedo_apache_vhost.root }} group={{ rubedo_apache.group }} state=directory mode=0755
+
+  - name: Untar Rubedo sources
+    command: tar zxf /tmp/rubedo.tar.gz -C {{ rubedo_apache_vhost.root }}  --strip-components 1
+    when: download_src.changed
+    notify: Restart Apache

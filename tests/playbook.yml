@@ -1,5 +1,42 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: front
+  sudo: yes
   roles:
-    - ansible-role-rubedo
+    - GMaissa.common
+    - GMaissa.rubedo
+    - kosssi.composer
+  tasks:
+    - name: Install Rubedo dependencies
+      shell: ./rubedo.sh
+      args:
+        chdir: "{{ rubedo_apache_vhost.root }}"
+
+  vars:
+    common_packages:
+      - vim
+      - tree
+      - git
+    rubedo_apache_vhost:
+      filename: rubedo
+      enabled: yes
+      listen: '*:80'
+      root: /var/www/rubedo
+      name: rubedo.local
+      aliases: []
+    rubedo_download: true
+    rubedo_version: 3.2.0
+
+- hosts: db
+  sudo: yes
+  roles:
+    - GMaissa.mongodb
+
+- hosts: search
+  sudo: yes
+  roles:
+    - GMaissa.elasticsearch
+  vars:
+    elasticsearch_version: 1.5.2
+    elasticsearch_mandatory_plugins:
+      elasticsearch/elasticsearch-mapper-attachments: 2.5.0
+      elasticsearch/elasticsearch-analysis-icu: 2.5.0

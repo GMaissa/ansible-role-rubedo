@@ -15,8 +15,9 @@
     - rubedo
     - configure
 
-- include: delivery-user.yml
-  when: rubedo_add_delivery_user
+- include: download.yml
   tags:
     - rubedo
-    - delivery-user
+    - download
+  when: rubedo_download|bool
+

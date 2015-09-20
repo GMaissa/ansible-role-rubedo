@@ -1,13 +1,13 @@
-<VirtualHost {{ item.value.listen }}>
-    DocumentRoot "{{ item.value.root }}/public"
-    ServerName {{ item.value.name }}
-    {% if item.value.aliases is defined %}
-    {% for ServerAlias in item.value.aliases %}
+<VirtualHost {{ rubedo_apache_vhost.listen }}>
+    DocumentRoot "{{ rubedo_apache_vhost.root }}/public"
+    ServerName {{ rubedo_apache_vhost.name }}
+    {% if rubedo_apache_vhost.aliases is defined %}
+    {% for ServerAlias in rubedo_apache_vhost.aliases %}
       ServerAlias {{ ServerAlias }}
     {% endfor %}
     {% endif %}
 
-    <Directory "{{ item.value.root }}/public">
+    <Directory "{{ rubedo_apache_vhost.root }}/public">
         Options -Indexes +FollowSymLinks
         AllowOverride None
         Order allow,deny
@@ -103,6 +103,6 @@
         Header unset Cache-Control
     </FilesMatch>
 
-    CustomLog "/var/log/{{ rubedo_apache.service }}/rubedo-access.log"  proxy env=forwarded
-    ErrorLog  "/var/log/{{ rubedo_apache.service }}/rubedo-error.log"
+    CustomLog "/var/log/{{ rubedo_apache.daemon }}/rubedo-access.log"  proxy env=forwarded
+    ErrorLog  "/var/log/{{ rubedo_apache.daemon }}/rubedo-error.log"
 </VirtualHost>
