@@ -8,6 +8,7 @@
 - name: Get list of PHP modules installed
   shell: php -m
   register: php_modules
+  changed_when: false
 
 - name: Install PECL extensions
   shell: printf "\n" | pecl install {{ item }}
