@@ -5,14 +5,18 @@
 - include: install-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: Get list of PHP modules installed
+  shell: php -m
+  register: php_modules
+
 - name: Install PECL extensions
   shell: printf "\n" | pecl install {{ item }}
+  when: php_modules.stdout.find(item) == -1
   with_items: rubedo_pecl.extensions
-  register: pecl_installs
   ignore_errors: yes
 
 - name: Configure PHP to use PECL extensions
-  shell: echo "extension={{ item.item }}.so" > {{ rubedo_pecl.conf_dir }}/{{ item.item }}.ini
-  when: item.rc != 1
-  with_items: pecl_installs.results
+  shell: echo "extension={{ item }}.so" > {{ rubedo_pecl.conf_dir }}/{{ item }}.ini
+  when: php_modules.stdout.find(item) == -1
+  with_items: rubedo_pecl.extensions
   notify: Restart Apache
